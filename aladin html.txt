@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ალადინი — აღმოსავლური ზღაპარი</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700&family=Noto+Serif+Georgian:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF8F3;
+      --card: #FFFFFF;
+      --text: #1E293B;
+      --muted: #475569;
+      --accent: #0F766E;
+      --accent-hover: #0D5E57;
+      --accent-light: #CCFBF1;
+      --gold: #D97706;
+      --gold-light: #FEF3C7;
+      --border: #E2E8F0;
+      --success-bg: #DCFCE7;
+      --success-text: #166534;
+      --error-bg: #FEE2E2;
+      --error-text: #991B1B;
+      --font-size: 19px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; animation: none !important; }
+    }
+
+    body {
+      font-family: 'Noto Sans Georgian', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      padding-bottom: 60px;
+    }
+
+    /* ზედა ნავიგაცია */
+    header {
+      background-color: var(--card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 20px;
+    }
+
+    .nav-container {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    nav a:hover, nav a:focus-visible {
+      background-color: var(--accent-light);
+      color: var(--accent);
+      outline: 2px solid var(--accent);
+    }
+
+    /* მთავარი კონტეინერი */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    /* შესავალი (Hero) */
+    .hero {
+      text-align: center;
+      padding: 36px 24px;
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      margin-bottom: 32px;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: var(--gold-light);
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-family: 'Noto Serif Georgian', serif;
+      font-size: 2.3rem;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 24px;
+      font-size: 1.05rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--accent);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-primary:hover, .btn-primary:focus-visible {
+      background-color: var(--accent-hover);
+      outline: 3px solid var(--accent-light);
+    }
+
+    /* სექციები */
+    section {
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      color: var(--text);
+    }
+
+    /* შრიფტის ზომის კონტროლი */
+    .font-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .font-btn {
+      background-color: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .font-btn:hover, .font-btn:focus-visible {
+      border-color: var(--accent);
+      color: var(--accent);
+      outline: 2px solid var(--accent);
+    }
+
+    /* ზღაპრის ტექსტი */
+    .story-intro {
+      background-color: var(--bg);
+      padding: 16px 20px;
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      font-size: var(--font-size);
+    }
+
+    .story-body {
+      font-family: 'Noto Serif Georgian', serif;
+      font-size: var(--font-size);
+      line-height: 1.9;
+    }
+
+    .story-body p {
+      margin-bottom: 16px;
+      text-indent: 1.2em;
+    }
+
+    .illustration {
+      display: flex;
+      justify-content: center;
+      margin: 24px 0;
+      padding: 16px;
+      background-color: var(--bg);
+      border-radius: 16px;
+    }
+
+    /* უცხო სიტყვები */
+    .words-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .word-card {
+      background-color: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .word-title {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .word-desc {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* კითხვები (სულ 3) */
+    .quiz-item {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: var(--bg);
+    }
+
+    .quiz-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .quiz-question {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-btn {
+      text-align: left;
+      background-color: var(--card);
+      border: 2px solid var(--border);
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .option-btn:hover:not(:disabled), .option-btn:focus-visible:not(:disabled) {
+      border-color: var(--accent);
+      background-color: var(--accent-light);
+      outline: none;
+    }
+
+    .option-btn.correct {
+      background-color: var(--success-bg);
+      border-color: var(--success-text);
+      color: var(--success-text);
+      font-weight: 700;
+    }
+
+    .option-btn.wrong {
+      background-color: var(--error-bg);
+      border-color: var(--error-text);
+      color: var(--error-text);
+    }
+
+    .feedback {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.success {
+      background-color: var(--success-bg);
+      color: var(--success-text);
+    }
+
+    .feedback.hint {
+      background-color: var(--gold-light);
+      color: #92400E;
+    }
+
+    .quiz-footer {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .score-text {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1.05rem;
+    }
+
+    .btn-secondary {
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      section { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="#top" class="brand">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M12 3v3M5.6 5.6l2.1 2.1M18.4 5.6l-2.1 2.1M4 15h14l2-4H7l-3 4zM7 15c0 2.5 2 4 5 4s5-1.5 5-4"/>
+        </svg>
+        ალადინი
+      </a>
+      <nav aria-label="მთავარი მენიუ">
+        <a href="#zgapari">ზღაპარი</a>
+        <a href="#sityvebi">სიტყვები</a>
+        <a href="#kitxvebi">კითხვები</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- მთავარი ბლოკი -->
+    <div class="hero">
+      <span class="badge">აღმოსავლური ზღაპარი</span>
+      <h1>ალადინი</h1>
+      <p>წაიკითხე ჯინის გათავისუფლების ამბავი, გაიგე უცხო სიტყვების მნიშვნელობა და უპასუხე 3 კითხვას.</p>
+      <a href="#zgapari" class="btn-primary">დაიწყე კითხვა</a>
+    </div>
+
+    <!-- სექცია 1: ზღაპარი -->
+    <section id="zgapari" aria-labelledby="zgapari-title">
+      <div class="section-header">
+        <h2 id="zgapari-title">წაიკითხე ზღაპარი</h2>
+        <div class="font-controls" aria-label="ტექსტის ზომის შეცვლა">
+          <button type="button" class="font-btn" id="font-decrease" aria-label="შრიფტის დაპატარავება">A-</button>
+          <button type="button" class="font-btn" id="font-increase" aria-label="შრიფტის გადიდება">A+</button>
+        </div>
+      </div>
+
+      <div class="story-intro">
+        ვინ არ იცნობს ალადინს — ღარიბ, გულკეთილ ბიჭს, რომელმაც მეფის ასულ იასმინის გული მოიგო და ორმოცი ყაჩაღი გააბრიყვა. ახლა კი ჯინის გათავისუფლების ამბავს წაიკითხავ.
+      </div>
+
+      <div class="illustration">
+        <!-- მარტივი, სუფთა SVG ილუსტრაცია: ჯადოსნური ლამპარი -->
+        <svg width="200" height="110" viewBox="0 0 200 110" role="img" aria-label="ჯადოსნური ოქროს ლამპარი და ცისფერი კვამლი">
+          <path d="M135 55 C145 35, 125 25, 140 12" fill="none" stroke="#0F766E" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
+          <path d="M50 75 C50 60, 80 55, 110 55 L145 45 L135 65 C135 80, 115 90, 90 90 C65 90, 50 85, 50 75 Z" fill="#F59E0B" stroke="#B45309" stroke-width="2.5"/>
+          <path d="M50 72 C32 72, 32 55, 52 60" fill="none" stroke="#B45309" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="90" cy="93" rx="22" ry="4" fill="#D97706"/>
+          <circle cx="92" cy="51" r="5" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <div class="story-body" id="story-text">
+        <p>გამოქვაბულში ჩამწყვდეულმა ალადინმა დამტვერილ ლამპარს ხეხვა დაუწყო, რათა ზედ ამოტვიფრული წარწერა წაეკითხა. უცებ ლამპარი აძაგძაგდა, იქიდან კაშკაშა შუქი ამოიფრქვა, გამოქვაბული კვამლის ღრუბელმა დაფარა, რომელიც ჯერ დაბზრიალდა და მერე ცისფერ ლანდად გადაიქცა.</p>
+        <p>— უჰ, რა საშინელებაა ათასი წელი ასეთ სივიწროვეში ყოფნა! — წარმოთქვა ლანდმა, როცა კვამლი გაიფანტა.</p>
+        <p>— შენ ვინ ხარ? — ჰკითხა ალადინმა.</p>
+        <p>— მე ამ ლამპრის ერთადერთი და უძლიერესი მკვიდრი ვარ. შენ კი ჩემი ბედნიერი ბატონი. ჩაიფიქრე სამი ნატვრა, — არც მეტი, არც ნაკლები, — და შეგისრულებ.</p>
+        <p>— თუ ასეთი ძლევამოსილი ხარ, როგორც თავი მოგაქვს, იქნებ აქედან ამომიყვანო, — მიმართა ყმაწვილმა ნიშნის მოგებით.</p>
+        <p>... და მაშინვე ყველა მიწის ზემოთ აღმოჩნდა. მალე ხალიჩაზე მოკალათებული მეგობრები აგრაბაჰისკენ მიქროდნენ.</p>
+        <p>— ჩემს სამ სურვილთან დაკავშირებით რას ფიქრობ? — დაინტერესდა ალადინი.</p>
+        <p>— ჰმ, ერთი ხომ უკვე შეგისრულე! — უპასუხა ჯინმა.</p>
+        <p>— ასეც არ არის! — ეშმაკურად ჩაიცინა ყმაწვილმა. — ეს ჩემი სურვილი არ იყო. შენ ეს თავად გინდოდა და იმიტომ გააკეთე. იცი, ყველაზე ძალიან რა მინდა? — უთხრა, როცა თავშესაფრამდე მიაღწიეს, — პრინცი მინდა გავხდე და ცოლად იასმინი შევირთო.</p>
+        <p>იმავე წამს სულმა გადიდება დაიწყო. გადიდდა, გადიდდა... და ყმაწვილის გარშემო ყველაფერი დაბზრიალდა. ალადინი თავით ფეხებამდე გადასხვაფერდა.</p>
+        <p>— დიდებულად გამოიყურები! — მიმართა ჯინმა ალადინს, როცა ძვირფას სამოსში გამოაწყო. — ნამდვილ პრინცს ჰგავხარ.</p>
+        <p>ახლა, ამ ახალი გარეგნობით, ჭაბუკი მზად იყო, იასმინისთვის სიყვარული აეხსნა.</p>
+        <p>— აბა, ახლა შენ იცი! — შესძახა ჯინმა. — დაე, ნახონ აგრაბაჰელებმა, როგორია პრინცი ალი!</p>
+        <p>ქუჩა სავსე იყო პრინცის სანახავად გამოსული ხალხით.</p>
+        <p>— საუცხოოა! — აღფრთოვანდა მბრძანებელი ალადინის დანახვისას, რომელიც სატახტო დარბაზში მფრინავი ხალიჩით შემოფრინდა.</p>
+        <p>— თქვენო ბრწყინვალებავ! მე შორეული ქვეყნიდან მოვედი თქვენი ქალიშვილის ხელის სათხოვნელად, — მიმართა ალადინმა მბრძანებელს და თავი მდაბლად დაუკრა.</p>
+        <p>— შესანიშნავია! — შვებით ამოისუნთქა იასმინის მამამ. იფიქრა, ბოლოს და ბოლოს გამოჩნდა პრინცი, რომელიც ჩემს ასულს გადაარჩენსო.</p>
+        <p>მოგვიანებით პრინცად ქცეულმა ალადინმა იასმინი მოინახულა.</p>
+        <p>— ჩვენ, მგონი, სადღაც უკვე შევხვედრივართ ერთმანეთს... მოედანზე ხომ არა? — ჰკითხა ქალიშვილმა.</p>
+        <p>— არა, ეს შეუძლებელია! იქ ხომ მხოლოდ მდაბიოები დადიან! — იუკადრისა ალადინმა.</p>
+        <p>— შენც ისეთივე მედიდური ხარ, როგორიც დანარჩენი პრინცები! — აღმოხდა იმედგაცრუებულ პრინცესას.</p>
+        <p>პრინც ალის ხმა ძალიან ჰგავდა იმ ვაჟის ხმას, რომელიც ბაზრის მოედანზე გაიცნო, მაგრამ იასმინს წყენამ მაშინვე გაუარა, როგორც კი ჭაბუკმა მფრინავი ხალიჩა აჩვენა.</p>
+        <p>— მენდობი? — ჰკითხა ალადინმა და ხალიჩაზე გვერდით მოისვა.</p>
+        <p>— რასაკვირველია! — უპასუხა ქალიშვილმა.</p>
+        <p>ხალიჩა აფრინდა, ქალაქ აგრაბაჰს გადაუქროლა და ღრუბლების თავზე მოექცა. ვარსკვლავებით მოჭედილი ცა ერთი ხელის გაწვდენაზეღა იყო და გრძნობდნენ, ჩიტებივით თავისუფლები იყვნენ...</p>
+      </div>
+    </section>
+
+    <!-- სექცია 2: უცხო სიტყვები -->
+    <section id="sityvebi" aria-labelledby="sityvebi-title">
+      <div class="section-header">
+        <h2 id="sityvebi-title">სიტყვების განმარტება</h2>
+      </div>
+      <div class="words-grid">
+        <div class="word-card">
+          <div class="word-title">გააბრიყვა</div>
+          <p class="word-desc">მოატყუა, ჭკუით აჯობა.</p>
+        </div>
+        <div class="word-card">
+          <div class="word-title">გადასხვაფერდა</div>
+          <p class="word-desc">სრულიად შეიცვალა გარეგნობა.</p>
+        </div>
+        <div class="word-card">
+          <div class="word-title">იუკადრისა</div>
+          <p class="word-desc">თაკილად მიიჩნია, არ ეკადრა.</p>
+        </div>
+        <div class="word-card">
+          <div class="word-title">მედიდური</div>
+          <p class="word-desc">ამაყი, ქედმაღალი.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- სექცია 3: მოკლე სავარჯიშო (3 კითხვა) -->
+    <section id="kitxvebi" aria-labelledby="kitxvebi-title">
+      <div class="section-header">
+        <h2 id="kitxvebi-title">შეამოწმე ცოდნა (3 კითხვა)</h2>
+      </div>
+
+      <!-- კითხვა 1 -->
+      <div class="quiz-item" data-correct="1">
+        <div class="quiz-question">1. რა მოჰყვა ლამპრის ხეხვას?</div>
+        <div class="options">
+          <button type="button" class="option-btn" data-index="0">ლამპარი გატყდა და ორად გაიყო.</button>
+          <button type="button" class="option-btn" data-index="1">ამოიფრქვა კაშკაშა შუქი და კვამლი ცისფერ ლანდად გადაიქცა.</button>
+          <button type="button" class="option-btn" data-index="2">გამოქვაბულში ოქროს მონეტები ჩამოცვივდა.</button>
+        </div>
+        <div class="feedback" role="status"></div>
+      </div>
+
+      <!-- კითხვა 2 -->
+      <div class="quiz-item" data-correct="2">
+        <div class="quiz-question">2. რა იყო ალადინის ყველაზე დიდი სურვილი?</div>
+        <div class="options">
+          <button type="button" class="option-btn" data-index="0">ბევრი ოქროსა და სასახლის ქონა.</button>
+          <button type="button" class="option-btn" data-index="1">მფრინავი ხალიჩით მსოფლიოს შემოვლა.</button>
+          <button type="button" class="option-btn" data-index="2">პრინცად ქცევა და იასმინის ცოლად შერთვა.</button>
+        </div>
+        <div class="feedback" role="status"></div>
+      </div>
+
+      <!-- კითხვა 3 -->
+      <div class="quiz-item" data-correct="0">
+        <div class="quiz-question">3. რომელ ფრაზაში ჩანს, რომ ალადინი და იასმინი თავს შესანიშნავად გრძნობდნენ?</div>
+        <div class="options">
+          <button type="button" class="option-btn" data-index="0">„გრძნობდნენ, ჩიტებივით თავისუფლები იყვნენ...“</button>
+          <button type="button" class="option-btn" data-index="1">„შენც ისეთივე მედიდური ხარ, როგორიც დანარჩენი პრინცები!“</button>
+          <button type="button" class="option-btn" data-index="2">„ქუჩა სავსე იყო პრინცის სანახავად გამოსული ხალხით.“</button>
+        </div>
+        <div class="feedback" role="status"></div>
+      </div>
+
+      <div class="quiz-footer">
+        <div class="score-text" id="score-display">სწორი პასუხი: 0 / 3</div>
+        <button type="button" class="btn-secondary" id="reset-quiz">თავიდან ცდა</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // შრიფტის ზომის რეგულირება
+    let currentFontSize = 19;
+    const root = document.documentElement;
+    document.getElementById('font-increase').addEventListener('click', () => {
+      if (currentFontSize < 25) {
+        currentFontSize += 2;
+        root.style.setProperty('--font-size', currentFontSize + 'px');
+      }
+    });
+    document.getElementById('font-decrease').addEventListener('click', () => {
+      if (currentFontSize > 15) {
+        currentFontSize -= 2;
+        root.style.setProperty('--font-size', currentFontSize + 'px');
+      }
+    });
+
+    // ტესტის ლოგიკა
+    const explanations = [
+      {
+        correct: "ყოჩაღ! ლამპარი აძაგძაგდა, ამოიფრქვა შუქი და კვამლისგან ჯინი გაჩნდა.",
+        hint: "მინიშნება: გადახედე ზღაპრის პირველ აბზაცს — რად გადაიქცა კვამლის ღრუბელი?"
+      },
+      {
+        correct: "სწორია! ალადინს ყველაზე მეტად პრინცად გახდომა და იასმინის ცოლად შერთვა სურდა.",
+        hint: "მინიშნება: გაიხსენე, რა უთხრა ალადინმა ჯინს, როცა თავშესაფრამდე მიაღწიეს."
+      },
+      {
+        correct: "ზუსტად ასეა! ეს ფრაზა ზღაპრის ბოლო წინადადებაშია.",
+        hint: "მინიშნება: წაიკითხე ზღაპრის სულ ბოლო აბზაცი, როცა ხალიჩა ღრუბლებს ზემოთ აფრინდა."
+      }
+    ];
+
+    let score = 0;
+    const quizItems = document.querySelectorAll('.quiz-item');
+    const scoreDisplay = document.getElementById('score-display');
+
+    quizItems.forEach((item, qIndex) => {
+      const correctIndex = parseInt(item.dataset.correct, 10);
+      const buttons = item.querySelectorAll('.option-btn');
+      const feedback = item.querySelector('.feedback');
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const chosen = parseInt(btn.dataset.index, 10);
+
+          if (chosen === correctIndex) {
+            if (!item.dataset.solved) {
+              score++;
+              item.dataset.solved = "true";
+              scoreDisplay.textContent = `სწორი პასუხი: ${score} / 3`;
+            }
+            buttons.forEach(b => {
+              b.classList.remove('wrong');
+              b.disabled = true;
+            });
+            btn.classList.add('correct');
+            feedback.textContent = explanations[qIndex].correct;
+            feedback.className = 'feedback show success';
+          } else {
+            btn.classList.add('wrong');
+            feedback.textContent = explanations[qIndex].hint;
+            feedback.className = 'feedback show hint';
+          }
+        });
+      });
+    });
+
+    // თავიდან დაწყება
+    document.getElementById('reset-quiz').addEventListener('click', () => {
+      score = 0;
+      scoreDisplay.textContent = "სწორი პასუხი: 0 / 3";
+      quizItems.forEach(item => {
+        delete item.dataset.solved;
+        const buttons = item.querySelectorAll('.option-btn');
+        buttons.forEach(b => {
+          b.disabled = false;
+          b.classList.remove('correct', 'wrong');
+        });
+        const feedback = item.querySelector('.feedback');
+        feedback.className = 'feedback';
+        feedback.textContent = '';
+      });
+    });
+  </script>
+</body>
+</html>
